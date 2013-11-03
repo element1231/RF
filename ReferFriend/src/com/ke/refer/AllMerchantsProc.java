@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -49,6 +50,8 @@ public class AllMerchantsProc extends HttpServlet {
 		merchant_id_name_set = merDB.getAllMerchant();
 		
 		String all_merchants_json = hashset_to_json_string(merchant_id_name_set);
+		response.setContentType("application/json");
+		response.getWriter().write(all_merchants_json.toString());
 		
 		System.out.println(all_merchants_json);
 
