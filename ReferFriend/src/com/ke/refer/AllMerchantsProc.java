@@ -48,9 +48,9 @@ public class AllMerchantsProc extends HttpServlet {
 		HashSet<HashMap<String, String>> merchant_id_name_set = new HashSet<HashMap<String, String>>();
 		merchant_id_name_set = merDB.getAllMerchant();
 		
-		String json = setmap_to_json_string(merchant_id_name_set);
+		String all_merchants_json = hashset_to_json_string(merchant_id_name_set);
 		
-		System.out.println(json);
+		System.out.println(all_merchants_json);
 
 	}
 
@@ -58,7 +58,7 @@ public class AllMerchantsProc extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	public String setmap_to_json_string(HashSet<HashMap<String, String>> hashset)
+	public String hashset_to_json_string(HashSet<HashMap<String, String>> hashset)
 	{       
 	    JSONArray json_arr=new JSONArray();
 	    for (HashMap<String, String> map : hashset) {
@@ -75,7 +75,9 @@ public class AllMerchantsProc extends HttpServlet {
 	        }
 	         json_arr.add(json_obj);
 	    }
-	    return json_arr.toString();
+	    JSONObject all_merchants=new JSONObject();
+	    all_merchants.put("all_merchants", json_arr);
+	    return all_merchants.toString();
 	}
 	
 	protected void doPost(HttpServletRequest request,
